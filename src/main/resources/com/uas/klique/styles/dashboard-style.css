@@ -1,0 +1,79 @@
+.root {
+    -fx-font-family: 'Poppins';
+    -fx-background-color: #F7F9F9;
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: #D5DBDB;
+    -fx-pref-width: 220;
+    -fx-padding: 10;
+}
+
+.sidebar-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2C3E50;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8 12;
+}
+
+.nav-button:hover {
+    -fx-background-color: #BDC3C7;
+}
+
+.nav-button.active {
+    -fx-background-color: #AAB7B8;
+    -fx-font-weight: bold;
+}
+
+.sidebar-footer {
+    -fx-background-color: #EAEDED;
+    -fx-padding: 10;
+    -fx-border-color: #ABB2B9;
+    -fx-border-width: 1 0 0 0;
+}
+
+.user-name {
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+}
+
+.logout-button {
+    -fx-text-fill: #E74C3C;
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+
+/* Dashboard */
+.page-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+}
+
+.stat-box {
+    -fx-background-color: #D6DBDF;
+    -fx-padding: 20;
+    -fx-background-radius: 10;
+    -fx-alignment: CENTER;
+    -fx-spacing: 10;
+}
+
+.stat-value {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
+
+.stat-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2C3E50;
+    -fx-text-alignment: CENTER;
+}

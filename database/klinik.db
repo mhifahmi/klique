@@ -1,0 +1,43 @@
+CREATE TABLE user_login (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL -- untuk kesederhanaan, plain text saja
+);
+
+CREATE TABLE pasien (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama TEXT NOT NULL,
+    nik TEXT NOT NULL UNIQUE,
+    tanggal_lahir TEXT,
+    jenis_kelamin TEXT,
+    alamat TEXT,
+    no_telepon TEXT
+);
+
+CREATE TABLE dokter (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama TEXT NOT NULL,
+    nik TEXT,
+    tanggal_lahir TEXT,
+    alamat TEXT,
+    no_telepon TEXT
+);
+
+CREATE TABLE ruangan (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nama_ruangan TEXT NOT NULL UNIQUE,
+    id_dokter INTEGER,
+    status TEXT, -- Tersedia / Konsultasi / Istirahat
+    FOREIGN KEY (id_dokter) REFERENCES dokter(id)
+);
+
+CREATE TABLE antrian (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nomor_antrian INTEGER,
+    id_pasien INTEGER,
+    id_ruangan INTEGER,
+    status TEXT, -- Menunggu / Konsultasi / Terlewat / Selesai
+    tanggal TEXT,
+    FOREIGN KEY (id_pasien) REFERENCES pasien(id),
+    FOREIGN KEY (id_ruangan) REFERENCES ruangan(id)
+);

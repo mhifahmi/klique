@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:controller="com.uas.klique.MainController"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="@styles/dashboard-style.css">
+
+    <!-- Sidebar -->
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <HBox spacing="10" alignment="CENTER_LEFT" padding="20">
+                <ImageView fitWidth="30" fitHeight="30">
+                    <image><Image url="@assets/clinic-logo.png"/></image>
+                </ImageView>
+                <Text text="Klinik Hoyong Damang" styleClass="sidebar-title" />
+            </HBox>
+            <Button text="Dashboard" onAction="#loadDashboard" styleClass="nav-button" />
+            <Button text="Antrian" onAction="#loadAntrian" styleClass="nav-button" />
+            <Button text="Data Pasien" onAction="#loadPasien" styleClass="nav-button" />
+            <Button text="Status Ruangan Dokter" onAction="#loadRuangan" styleClass="nav-button" />
+            <VBox vgrow="ALWAYS"/>
+            <VBox spacing="5" styleClass="sidebar-footer">
+                <Label text="Thor Finn Affianto" styleClass="user-name"/>
+                <Label text="Staff" styleClass="user-role"/>
+                <Button text="Log out" onAction="#logout" styleClass="logout-button"/>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- Konten Dinamis -->
+    <center>
+        <StackPane fx:id="contentPane"/>
+    </center>
+
+</BorderPane>

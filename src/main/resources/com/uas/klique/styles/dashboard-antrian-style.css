@@ -1,0 +1,43 @@
+.page-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.stat-value {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+}
+
+.stat-subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+}
+
+.stat-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7F8C8D;
+}
+
+.antrian-box {
+    -fx-background-color: #D5DBDB;
+    -fx-padding: 15;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-background-radius: 6;
+}
+
+.form-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+}
+
+.form-group {
+    -fx-pref-width: 250;
+}
+
+.table-view {
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 6;
+}

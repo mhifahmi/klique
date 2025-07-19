@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane stylesheets="@styles/main-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.MainController">
+    <VBox alignment="CENTER" prefHeight="720" prefWidth="1280" spacing="30" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+        <!-- Title -->
+        <VBox alignment="CENTER" spacing="5">
+            <Text styleClass="title-text" text="Klique" />
+            <Text styleClass="subtitle-text" text="Sistem Antrian Klinik" />
+        </VBox>
+
+        <!-- 2 Card Pilihan -->
+        <HBox alignment="CENTER" spacing="50">
+
+            <!-- Lihat Antrian -->
+            <VBox alignment="CENTER" onMouseClicked="#handleLihatAntrian" prefHeight="400.0" prefWidth="400.0" spacing="10" styleClass="card">
+                <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/queue.png" />
+                    </image>
+                </ImageView>
+                <Text styleClass="card-title" text="Lihat Antrian" textAlignment="CENTER" wrappingWidth="162.32200622558594" />
+                <Text styleClass="card-desc" text="Lihat langsung antrian sebagai pengunjung" textAlignment="CENTER" wrappingWidth="345.0" />
+            </VBox>
+
+            <!-- Login -->
+            <VBox alignment="CENTER" onMouseClicked="#handleLogin" prefHeight="400.0" prefWidth="400.0" spacing="10" styleClass="card">
+                <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@assets/enter.png" />
+                    </image>
+                </ImageView>
+                <Text styleClass="card-title" text="Login" textAlignment="CENTER" wrappingWidth="149.67999649047852" />
+                <Text styleClass="card-desc" text="Masuk ke aplikasi sebagai staff" textAlignment="CENTER" wrappingWidth="286.0" />
+            </VBox>
+
+        </HBox>
+    </VBox>
+</AnchorPane>

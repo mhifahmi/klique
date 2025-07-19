@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.dashboard.DashboardAntrianController">
+
+    <VBox spacing="20" style="-fx-padding: 30;">
+        <!-- Judul -->
+        <Text text="Antrian" styleClass="page-title" />
+
+        <!-- Statistik Antrian -->
+        <GridPane hgap="20" vgap="20">
+            <VBox styleClass="antrian-box">
+                <Text text="19" styleClass="stat-value"/>
+                <Text text="Roger Sumatra" styleClass="stat-subtitle"/>
+                <Label text="Nomor Antrian Terakhir Dipanggil" styleClass="stat-label"/>
+            </VBox>
+            <VBox styleClass="antrian-box">
+                <Text text="20" styleClass="stat-value"/>
+                <Label text="Antrian Selanjutnya" styleClass="stat-label"/>
+                <Button text="Panggil Antrian Selanjutnya" />
+            </VBox>
+            <VBox styleClass="antrian-box">
+                <Text text="17" styleClass="stat-value"/>
+                <Label text="Antrian Terlewat" styleClass="stat-label"/>
+                <Button text="Panggil Antrian Terlewat" />
+            </VBox>
+        </GridPane>
+
+        <!-- Form Tambah Antrian -->
+        <VBox spacing="10">
+            <Text text="Tambah Antrian Baru" styleClass="form-title"/>
+            <HBox spacing="10">
+                <VBox spacing="5" styleClass="form-group">
+                    <Label text="Cari nama Pasien:" />
+                    <TextField fx:id="fieldNamaPasien" promptText="Nama pasien..." />
+                </VBox>
+                <VBox spacing="5" styleClass="form-group">
+                    <Label text="Cari nama Dokter (Opsional):" />
+                    <TextField fx:id="fieldDokter" promptText="Nama dokter..." />
+                </VBox>
+                <Button text="Tambahkan Antrian" onAction="#tambahAntrian" />
+            </HBox>
+        </VBox>
+
+        <!-- Tabel Antrian -->
+        <VBox spacing="10">
+            <Text text="Data Antrian" styleClass="form-title"/>
+            <TableView fx:id="tableAntrian" prefHeight="300">
+                <columns>
+                    <TableColumn text="No" prefWidth="40"/>
+                    <TableColumn text="Nama Pengunjung" prefWidth="180"/>
+                    <TableColumn text="Nomor Antrian" prefWidth="120"/>
+                    <TableColumn text="Status" prefWidth="120"/>
+                    <TableColumn text="Ruang" prefWidth="100"/>
+                    <TableColumn text="Aksi" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+</AnchorPane>
