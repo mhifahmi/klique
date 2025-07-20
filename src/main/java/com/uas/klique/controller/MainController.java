@@ -30,7 +30,7 @@ public class MainController {
         try {
             Parent loginView = FXMLLoader.load(getClass().getResource("/com/uas/klique/login-view.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loginView, 1280, 720));
+            stage.setScene(new Scene(loginView, 1440, 768));
             stage.setTitle("Login - Klique");
             stage.show();
         } catch (IOException e) {
