@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.controller.DashboardController">
+
+    <!-- Pembungkus utama -->
+    <HBox alignment="CENTER">
+        <!-- Kontainer isi dashboard -->
+        <VBox maxWidth="960" spacing="20" styleClass="dashboard-root">
+            <!-- Judul halaman -->
+            <Text styleClass="page-title" text="Dashboard" />
+
+            <!-- Grid statistik -->
+            <GridPane hgap="20" vgap="20">
+                <!-- Baris 1 -->
+                <VBox styleClass="stat-box" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <ImageView fitWidth="120" fitHeight="120">
+                        <image><Image url="@assets/group.png" /></image>
+                    </ImageView>
+                    <Text fx:id="totalPasienText" styleClass="stat-value" text="25" />
+                    <Text styleClass="stat-label" text="Jumlah Pasien Hari Ini" />
+                </VBox>
+
+                <VBox styleClass="stat-box" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <ImageView fitWidth="120" fitHeight="120">
+                        <image><Image url="@assets/queue.png" /></image>
+                    </ImageView>
+                    <Text fx:id="pasienDalamAntrianText" styleClass="stat-value" text="12" />
+                    <Text styleClass="stat-label" text="Pasien Dalam Antrian" />
+                </VBox>
+
+                <VBox styleClass="stat-box" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <ImageView fitWidth="120" fitHeight="120">
+                        <image><Image url="@assets/next.png" /></image>
+                    </ImageView>
+                    <Text fx:id="pasienDipanggilText" styleClass="stat-value" text="9" />
+                    <Text styleClass="stat-label" text="Pasien Sudah Dipanggil" />
+                </VBox>
+
+                <!-- Baris 2 -->
+                <VBox styleClass="stat-box" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <ImageView fitWidth="120" fitHeight="120">
+                        <image><Image url="@assets/phone-call.png" /></image>
+                    </ImageView>
+                    <Text fx:id="pasienDilewatiText" styleClass="stat-value" text="3" />
+                    <Text styleClass="stat-label" text="Pasien Dilewati Hari Ini" />
+                </VBox>
+
+                <VBox styleClass="stat-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <ImageView fitWidth="120" fitHeight="120">
+                        <image><Image url="@assets/waiting-room.png" /></image>
+                    </ImageView>
+                    <Text fx:id="ruanganTersediaText" styleClass="stat-value" text="2/3" />
+                    <Text styleClass="stat-label" text="Ruangan Tersedia" />
+                </VBox>
+
+                <VBox styleClass="stat-box" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <ImageView fitWidth="120" fitHeight="120">
+                        <image><Image url="@assets/people.png" /></image>
+                    </ImageView>
+                    <Text fx:id="antrianTerakhirText" styleClass="stat-value" text="19" />
+                    <Text styleClass="stat-label" text="Nomor Antrian Terakhir" />
+                </VBox>
+
+                <!-- Konfigurasi kolom dan baris -->
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="ALWAYS" />
+                    <RowConstraints vgrow="ALWAYS" />
+                </rowConstraints>
+            </GridPane>
+        </VBox>
+    </HBox>
+</AnchorPane>

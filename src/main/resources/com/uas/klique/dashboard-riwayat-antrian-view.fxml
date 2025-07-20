@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.DashboardRiwayatAntrianController">
+    <VBox alignment="TOP_CENTER" spacing="15.0" AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+        <Label text="Riwayat Antrian Pasien" styleClass="form-title" />
+
+        <HBox spacing="10">
+            <Label text="Rentang Tanggal:" />
+            <DatePicker fx:id="startDatePicker" promptText="Tanggal Mulai" />
+            <DatePicker fx:id="endDatePicker" promptText="Tanggal Akhir" />
+            <Button fx:id="btnCari" text="Cari" onAction="#cariRiwayat" />
+            <Button fx:id="btnReset" text="Reset" onAction="#resetRiwayat" />
+        </HBox>
+
+        <TableView fx:id="tableRiwayat" prefHeight="400.0">
+            <columns>
+                <TableColumn fx:id="colNo" text="No" prefWidth="50" />
+                <TableColumn fx:id="colNamaPasien" text="Nama Pasien" prefWidth="180" />
+                <TableColumn fx:id="colNik" text="NIK" prefWidth="150" />
+                <TableColumn fx:id="colTanggal" text="Tanggal Kunjungan" prefWidth="130" />
+                <TableColumn fx:id="colDokter" text="Dokter yang Menangani" prefWidth="180" />
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="100" />
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>

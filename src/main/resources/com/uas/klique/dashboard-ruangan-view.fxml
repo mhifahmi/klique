@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.controller.DashboardRuanganController">
+
+    <HBox alignment="CENTER">
+        <VBox prefWidth="800" spacing="20" styleClass="dashboard-root">
+            <!-- Edit Ruangan Form -->
+            <Text styleClass="form-title" text="Edit Ruangan" />
+            <HBox spacing="10">
+                <VBox spacing="5">
+                    <Label text="Dokter Baru:" />
+                    <ComboBox fx:id="comboDokter" prefWidth="200" />
+                </VBox>
+                <VBox spacing="5">
+                    <Label text="Status Baru:" />
+                    <ComboBox fx:id="comboStatus" prefWidth="200">
+                    </ComboBox>
+                </VBox>
+                <Button text="Update Ruangan" onAction="#updateRuangan" styleClass="secondary-button" />
+            </HBox>
+
+            <!-- Table Ruangan -->
+            <Text styleClass="page-title" text="Ruang Dokter" />
+            <VBox spacing="10">
+                <Text styleClass="form-title" text="Daftar Ruangan" />
+                <TableView fx:id="tableRuangan" prefHeight="200" prefWidth="800">
+                    <columns>
+                        <TableColumn fx:id="colNo" text="No" prefWidth="40" />
+                        <TableColumn fx:id="colNamaRuangan" text="Nama Ruangan" prefWidth="120" />
+                        <TableColumn fx:id="colNamaDokter" text="Nama Dokter" prefWidth="180" />
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="100" />
+                        <TableColumn fx:id="colTglLahir" text="Tanggal Lahir" prefWidth="120" />
+                        <TableColumn fx:id="colAksi" text="Aksi" prefWidth="100" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Table Dokter -->
+            <VBox spacing="10">
+                <Text styleClass="form-title" text="Daftar Dokter" />
+                <TableView fx:id="tableDokter" prefHeight="200" prefWidth="800">
+                    <columns>
+                        <TableColumn fx:id="colNoDokter" text="No" prefWidth="40" />
+                        <TableColumn fx:id="colNamaDokterTable" text="Nama Dokter" prefWidth="180" />
+                        <TableColumn fx:id="colNikDokter" text="NIK" prefWidth="160" />
+                        <TableColumn fx:id="colTelpDokter" text="No. Telepon" prefWidth="140" />
+                        <TableColumn fx:id="colTglLahirDokter" text="Tanggal Lahir" prefWidth="120" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </HBox>
+</AnchorPane>
