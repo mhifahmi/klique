@@ -1,77 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane stylesheets="@styles/antrian-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.AntrianController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.controller.AntrianController"
+            stylesheets="@styles/antrian-style.css">
 
-    <VBox prefHeight="720" prefWidth="1280" spacing="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <VBox spacing="20" alignment="TOP_CENTER" styleClass="dashboard-root">
 
-        <!-- Header -->
-        <HBox alignment="CENTER_LEFT" spacing="20">
-            <Text styleClass="header-text" text="Daftar Antrian - Klinik Hoyong Damang" />
-            <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
-            <Text fx:id="headerDate" styleClass="date-text" />
-        </HBox>
+                <!-- Header -->
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <Text styleClass="header-text" text="Daftar Antrian - Klinik Hoyong Damang" />
+                    <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+                    <Text fx:id="headerDate" styleClass="date-text" />
+                </HBox>
 
-        <!-- Main Queue & Room Status -->
-        <HBox spacing="30">
+                <!-- Main Queue & Room Status -->
+                <HBox spacing="30">
+                    <!-- Next Queue -->
+                    <VBox spacing="10" styleClass="panel">
+                        <Text styleClass="section-title" text="Antrian Selanjutnya" />
+                        <Text fx:id="nextQueueNumber" styleClass="big-number" text="08" />
+                        <Text fx:id="nextQueueName" styleClass="name-text" text="Nama Pasien" />
+                        <Label fx:id="nextQueueDoctor" maxWidth="Infinity" styleClass="doctor-label" text="Dr. Nama Dokter" />
+                    </VBox>
 
-            <!-- Next Queue -->
-            <VBox prefWidth="600" spacing="10" styleClass="panel">
-                <Text styleClass="section-title" text="Antrian Selanjutnya" />
-                <Text fx:id="nextQueueNumber" styleClass="big-number" text="08" />
-                <Text fx:id="nextQueueName" styleClass="name-text" text="Nama Pasien" />
-                <Label fx:id="nextQueueDoctor" maxWidth="Infinity" styleClass="doctor-label" text="Dr. Nama Dokter" />
+                    <!-- Room Status -->
+                    <VBox spacing="10">
+                        <VBox spacing="5" styleClass="panel room-available">
+                            <Text fx:id="room1Status" styleClass="section-title" />
+                            <Text fx:id="room1Doctor" styleClass="doctor-label" />
+                        </VBox>
+                        <VBox spacing="5" styleClass="panel room-rest">
+                            <Text fx:id="room2Status" styleClass="section-title" />
+                            <Text fx:id="room2Doctor" styleClass="doctor-label" />
+                        </VBox>
+                        <VBox spacing="5" styleClass="panel room-consulting">
+                            <Text fx:id="room3Status" styleClass="section-title" />
+                            <Text fx:id="room3Doctor" styleClass="doctor-label" />
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <!-- Statistik -->
+                <HBox spacing="30">
+                    <VBox alignment="CENTER" styleClass="counter-box">
+                        <Text styleClass="section-title" text="Menunggu Antrian" />
+                        <Text fx:id="waitingQueueCount" styleClass="big-number" text="00" />
+                    </VBox>
+                    <VBox alignment="CENTER" styleClass="counter-box">
+                        <Text styleClass="section-title" text="Antrian Terlewat" />
+                        <Text fx:id="missedQueueCount" styleClass="big-number" text="00" />
+                    </VBox>
+                    <VBox alignment="CENTER" styleClass="counter-box">
+                        <Text styleClass="section-title" text="Antrian Selesai" />
+                        <Text fx:id="emptyQueueCount" styleClass="big-number" text="00" />
+                    </VBox>
+                </HBox>
+
+                <!-- Tabel -->
+                <TableView fx:id="antrianTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colNomor" text="Nomor" />
+                        <TableColumn fx:id="colPasien" text="Pasien" />
+                        <TableColumn fx:id="colDokter" text="Dokter" />
+                        <TableColumn fx:id="colStatus" text="Status" />
+                    </columns>
+                </TableView>
+
             </VBox>
+        </ScrollPane>
+    </center>
 
-            <!-- Room Status -->
-            <VBox prefWidth="600" spacing="10">
-                <VBox spacing="5" styleClass="panel room-available">
-                    <Text fx:id="room1Status" styleClass="section-title" />
-                    <Text fx:id="room1Doctor" styleClass="doctor-label" />
-                </VBox>
-                <VBox spacing="5" styleClass="panel room-rest">
-                    <Text fx:id="room2Status" styleClass="section-title" />
-                    <Text fx:id="room2Doctor" styleClass="doctor-label" />
-                </VBox>
-                <VBox spacing="5" styleClass="panel room-consulting">
-                    <Text fx:id="room3Status" styleClass="section-title" />
-                    <Text fx:id="room3Doctor" styleClass="doctor-label" />
-                </VBox>
-            </VBox>
-        </HBox>
-
-        <!-- Statistik -->
-        <HBox spacing="30">
-            <VBox alignment="CENTER" prefWidth="420" styleClass="counter-box">
-                <Text styleClass="section-title" text="Menunggu Antrian" />
-                <Text fx:id="waitingQueueCount" styleClass="big-number" text="00" />
-            </VBox>
-            <VBox alignment="CENTER" prefWidth="420" styleClass="counter-box">
-                <Text styleClass="section-title" text="Antrian Terlewat" />
-                <Text fx:id="missedQueueCount" styleClass="big-number" text="00" />
-            </VBox>
-            <VBox alignment="CENTER" prefWidth="420" styleClass="counter-box">
-                <Text styleClass="section-title" text="Antrian Selesai" />
-                <Text fx:id="emptyQueueCount" styleClass="big-number" text="00" />
-            </VBox>
-        </HBox>
-
-        <TableView fx:id="antrianTable" VBox.vgrow="ALWAYS">
-            <columns>
-                <TableColumn fx:id="colNomor" minWidth="-1.0" text="Nomor" />
-                <TableColumn fx:id="colPasien" minWidth="-1.0" text="Pasien" />
-                <TableColumn fx:id="colDokter" minWidth="-1.0" text="Dokter" />
-                <TableColumn fx:id="colStatus" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="89.0" text="Status" />
-            </columns>
-        </TableView>
-
-    </VBox>
-</AnchorPane>
+</BorderPane>

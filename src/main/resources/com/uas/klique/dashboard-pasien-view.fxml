@@ -1,87 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.DashboardPasienController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.DashboardPasienController">
 
-    <!-- Wrapper center -->
-    <HBox alignment="CENTER">
-        <!-- Konten utama dibatasi max-width -->
-        <VBox prefWidth="800" spacing="20" styleClass="dashboard-root">
-            <Text styleClass="page-title" text="Data Pasien" />
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <VBox spacing="20" alignment="TOP_CENTER" styleClass="dashboard-root">
+                <Text styleClass="page-title" text="Data Pasien" />
 
-            <!-- Form Tambah Pasien -->
-            <VBox spacing="10">
-                <Text styleClass="form-title" text="Tambah Pasien Baru" />
-                <GridPane hgap="10" vgap="10">
-                    <columnConstraints>
-                        <ColumnConstraints percentWidth="20" />
-                        <ColumnConstraints percentWidth="30" />
-                        <ColumnConstraints percentWidth="20" />
-                        <ColumnConstraints percentWidth="30" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                    </rowConstraints>
+                <!-- Form Tambah Pasien -->
+                <VBox spacing="10">
+                    <Text styleClass="form-title" text="Tambah Pasien Baru" />
+                    <GridPane hgap="10" vgap="10">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="20" />
+                            <ColumnConstraints percentWidth="30" />
+                            <ColumnConstraints percentWidth="20" />
+                            <ColumnConstraints percentWidth="30" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                        </rowConstraints>
 
-                    <Label text="Nama Pasien:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="namaField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label text="Nama Pasien:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="namaField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                    <Label text="NIK:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-                    <TextField fx:id="nikField" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+                        <Label text="NIK:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+                        <TextField fx:id="nikField" GridPane.columnIndex="3" GridPane.rowIndex="0" />
 
-                    <Label text="Alamat:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="alamatField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Alamat:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="alamatField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                    <Label text="Tanggal Lahir:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                    <TextField fx:id="tglLahirField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label text="Tanggal Lahir:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <TextField fx:id="tglLahirField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
-                    <Label text="Jenis Kelamin:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <TextField fx:id="jkField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Jenis Kelamin:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <TextField fx:id="jkField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                    <Label text="No.Telepon:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                    <TextField fx:id="telpField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                </GridPane>
+                        <Label text="No.Telepon:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <TextField fx:id="telpField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                    </GridPane>
 
-                <Button onAction="#tambahPasien" text="Tambahkan/Update Pasien" />
-            </VBox>
-
-            <!-- Tabel Pasien -->
-            <VBox spacing="10">
-                <Text styleClass="form-title" text="Daftar Pasien" />
-
-                <!-- Pencarian -->
-                <HBox spacing="10">
-                    <Label text="Cari Pasien:" />
-                    <TextField fx:id="searchPasienField" prefHeight="25.0" prefWidth="360.0" promptText="Nama atau NIK pasien..." />
-                </HBox>
+                    <Button onAction="#tambahPasien" text="Tambahkan/Update Pasien" />
+                </VBox>
 
                 <!-- Tabel Pasien -->
-                <TableView fx:id="tablePasien" prefHeight="320.0" prefWidth="800">
-                    <columns>
-                        <TableColumn fx:id="colNo" prefWidth="50" text="No" />
-                        <TableColumn fx:id="colNama" prefWidth="150" text="Nama Pasien" />
-                        <TableColumn fx:id="colNik" prefWidth="150" text="NIK" />
-                        <TableColumn fx:id="colTelp" prefWidth="120" text="No. Telepon" />
-                        <TableColumn fx:id="colTglLahir" prefWidth="120" text="Tanggal Lahir" />
-                        <TableColumn fx:id="colAksi" prefWidth="180" text="Aksi" />
-                    </columns>
-                </TableView>
-            </VBox>
+                <VBox spacing="10" VBox.vgrow="ALWAYS">
+                    <Text styleClass="form-title" text="Daftar Pasien" />
 
-        </VBox>
-    </HBox>
-</AnchorPane>
+                    <!-- Pencarian -->
+                    <HBox spacing="10">
+                        <Label text="Cari Pasien:" />
+                        <TextField fx:id="searchPasienField" promptText="Nama atau NIK pasien..." />
+                    </HBox>
+
+                    <!-- Tabel Pasien -->
+                    <TableView fx:id="tablePasien" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colNo" text="No" />
+                            <TableColumn fx:id="colNama" text="Nama Pasien" />
+                            <TableColumn fx:id="colNik" text="NIK" />
+                            <TableColumn fx:id="colTelp" text="No. Telepon" />
+                            <TableColumn fx:id="colTglLahir" text="Tanggal Lahir" />
+                            <TableColumn fx:id="colAksi" text="Aksi" />
+                        </columns>
+                    </TableView>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

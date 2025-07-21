@@ -17,7 +17,8 @@ public class MainController {
         try {
             Parent antrianView = FXMLLoader.load(getClass().getResource("/com/uas/klique/antrian-view.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(antrianView, 1440, 768));
+            stage.setScene(new Scene(antrianView));
+            stage.setMaximized(true);
             stage.setTitle("Lihat Antrian - Klique");
             stage.show();
         } catch (IOException e) {
@@ -30,7 +31,8 @@ public class MainController {
         try {
             Parent loginView = FXMLLoader.load(getClass().getResource("/com/uas/klique/login-view.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(loginView, 1440, 768));
+            stage.setScene(new Scene(loginView));
+            stage.setMaximized(true);
             stage.setTitle("Login - Klique");
             stage.show();
         } catch (IOException e) {

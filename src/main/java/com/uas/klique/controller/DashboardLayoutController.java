@@ -34,6 +34,8 @@ public class DashboardLayoutController {
     public void initialize() {
         loadView("/com/uas/klique/dashboard-view.fxml");
         setActiveButton(btnDashboard);
+//        loadView("/com/uas/klique/dashboard-antrian-view.fxml");
+//        setActiveButton(btnAntrian);
     }
 
     public void loadDashboard() {
@@ -64,9 +66,10 @@ public class DashboardLayoutController {
     public void logout() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/uas/klique/main-view.fxml"));
-            Scene scene = new Scene(loader.load(), 1440, 768);
+            Scene scene = new Scene(loader.load());
 
             Stage stage = (Stage) contentPane.getScene().getWindow();
+            stage.setMaximized(true);
             stage.setScene(scene);
             stage.setTitle("Login - Klinik Hoyong Damang");
             stage.show();

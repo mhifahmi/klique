@@ -45,7 +45,7 @@ public class DashboardRiwayatAntrianController {
         colNo.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(null));
 
         colNamaPasien.setCellValueFactory(new PropertyValueFactory<>("namaPasien"));
-        colNik.setCellValueFactory(new PropertyValueFactory<>("nik"));
+        colNik.setCellValueFactory(new PropertyValueFactory<>("pasienNik"));
         colTanggal.setCellValueFactory(new PropertyValueFactory<>("tanggal"));
         colDokter.setCellValueFactory(cell -> {
             String nama = cell.getValue().getNamaDokter();

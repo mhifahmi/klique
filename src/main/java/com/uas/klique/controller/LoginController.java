@@ -36,9 +36,10 @@ public class LoginController {
                 DashboardLayoutController controller = loader.getController();
                 controller.setUserInfo(user);
 
-                Scene scene = new Scene(dashboardView, 1440, 768);
+                Scene scene = new Scene(dashboardView);
 
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setMaximized(true);
                 stage.setScene(scene);
                 stage.setTitle("Dashboard - Klinik Hoyong Damang");
                 stage.show();

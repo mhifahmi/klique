@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane stylesheets="@styles/login-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.LoginController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.controller.LoginController"
+            stylesheets="@styles/login-style.css">
 
-    <HBox prefHeight="720" prefWidth="1280">
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true">
+            <HBox prefHeight="720" prefWidth="1280">
 
-        <!-- Kiri: Branding Klinik -->
-        <StackPane fx:id="brandingPane" prefWidth="640" styleClass="left-pane">
-            <ImageView fitHeight="720.0" fitWidth="640.0" opacity="0.3" preserveRatio="false">
-                <image>
-                    <Image url="@assets/bg-klinik.jpg" />
-                </image>
-            </ImageView>
+                <!-- Kiri: Branding Klinik -->
+                <StackPane fx:id="brandingPane" prefWidth="640" styleClass="left-pane">
+                    <ImageView fitHeight="720.0" fitWidth="640.0" opacity="0.3" preserveRatio="false">
+                        <image>
+                            <Image url="@assets/bg-klinik.jpg" />
+                        </image>
+                    </ImageView>
 
-            <VBox alignment="CENTER" spacing="15">
-                <ImageView fitHeight="100" fitWidth="100">
-                    <image>
-                        <Image url="@assets/clinic-logo.png" />
-                    </image>
-                </ImageView>
-                <Text styleClass="clinic-name" text="Klinik Hoyong Damang" />
-                <Text styleClass="clinic-motto" text="&quot;Mens sana in corpore sano&quot;" />
-            </VBox>
+                    <VBox alignment="CENTER" spacing="15">
+                        <ImageView fitHeight="100" fitWidth="100">
+                            <image>
+                                <Image url="@assets/clinic-logo.png" />
+                            </image>
+                        </ImageView>
+                        <Text styleClass="clinic-name" text="Klinik Hoyong Damang" />
+                        <Text styleClass="clinic-motto" text="&quot;Mens sana in corpore sano&quot;" />
+                    </VBox>
 
-            <Label styleClass="clinic-address" text="Jalan Terusan Belakang Indo April No.76, Kota Bandung" StackPane.alignment="BOTTOM_CENTER" />
-        </StackPane>
+                    <Label styleClass="clinic-address" text="Jalan Terusan Belakang Indo April No.76, Kota Bandung" StackPane.alignment="BOTTOM_CENTER" />
+                </StackPane>
 
-        <!-- Kanan: Form Login -->
-        <VBox alignment="CENTER" prefWidth="640" spacing="20" styleClass="right-pane">
-            <Text styleClass="login-title" text="Masuk ke Aplikasi" />
+                <!-- Kanan: Form Login -->
+                <VBox alignment="CENTER" prefWidth="640" spacing="20" styleClass="right-pane">
+                    <Text styleClass="login-title" text="Masuk ke Aplikasi" />
 
-            <VBox maxWidth="400" minWidth="300" spacing="15">
-                <Label styleClass="form-label" text="Username" />
-                <TextField fx:id="usernameField" promptText="Masukkan username" styleClass="form-field" />
+                    <VBox maxWidth="400" minWidth="300" spacing="15">
+                        <Label styleClass="form-label" text="Username" />
+                        <TextField fx:id="usernameField" promptText="Masukkan username" styleClass="form-field" />
 
-                <Label styleClass="form-label" text="Password" />
-                <PasswordField fx:id="passwordField" promptText="Masukkan password" styleClass="form-field" />
+                        <Label styleClass="form-label" text="Password" />
+                        <PasswordField fx:id="passwordField" promptText="Masukkan password" styleClass="form-field" />
 
-                <Button text="Sign In" prefHeight="40.0" prefWidth="459.0" onAction="#handleLogin" styleClass="login-button" />
+                        <Button text="Sign In" prefHeight="40.0" prefWidth="459.0" onAction="#handleLogin" styleClass="login-button" />
 
-                <Label prefWidth="449.0" styleClass="forgot-text" text="Lupa kata sandi? Segera hubungi Admin!" />
-            </VBox>
-        </VBox>
-    </HBox>
+                        <Label prefWidth="449.0" styleClass="forgot-text" text="Lupa kata sandi? Segera hubungi Admin!" />
+                    </VBox>
+                </VBox>
+            </HBox>
+        </ScrollPane>
+    </center>
 
-</AnchorPane>
+</BorderPane>
