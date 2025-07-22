@@ -74,7 +74,7 @@ Aplikasi Klique menawarkan fitur utama seperti:
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/username/klique.git
+git clone https://github.com/mhifahmi/klique.git
 cd klique
 ```
 ### 2. Buka di IDE (IntelliJ / VS Code / NetBeans)
