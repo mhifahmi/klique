@@ -3,18 +3,23 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.ScrollPane?>
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.DashboardAntrianController">
 
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true">
-            <VBox fx:id="mainContent" spacing="20" alignment="TOP_CENTER" styleClass="dashboard-root">
+        <ScrollPane fitToHeight="true" fitToWidth="true">
+            <VBox fx:id="mainContent" alignment="TOP_CENTER" spacing="20" styleClass="dashboard-root">
 
                 <!-- Judul -->
                 <Text styleClass="page-title" text="Antrian" />
@@ -52,6 +57,9 @@
                     <VBox styleClass="antrian-box" GridPane.columnIndex="4">
                         <Button fx:id="btnPanggilTerlewat" onAction="#panggilAntrianTerlewat" styleClass="secondary-button" text="Panggil Antrian Terlewat" />
                     </VBox>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
                 </GridPane>
 
                 <!-- Form Tambah Antrian -->
@@ -60,10 +68,10 @@
                     <HBox spacing="10">
                         <VBox spacing="5" styleClass="form-group">
                             <Label text="Cari nama Pasien:" />
-                            <TextField fx:id="fieldNamaPasien" promptText="Nama pasien..." />
-                            <ListView fx:id="listPasienSuggestion" maxHeight="100" visible="false" />
+                            <TextField fx:id="fieldNamaPasien" prefHeight="25.0" prefWidth="400.0" promptText="Nama pasien..." />
+                            <ListView fx:id="listPasienSuggestion" maxHeight="100" minHeight="50.0" visible="false" />
                         </VBox>
-                        <Button onAction="#tambahAntrian" styleClass="secondary-button" text="Tambahkan Antrian" />
+                        <Button onAction="#tambahAntrian" prefHeight="47.0" styleClass="secondary-button" text="Tambahkan Antrian" />
                     </HBox>
                 </VBox>
 
@@ -72,7 +80,7 @@
                     <Text styleClass="form-title" text="Data Antrian" />
                     <HBox spacing="10">
                         <Label text="Cari Antrian:" />
-                        <TextField fx:id="searchAntrianField" promptText="Nama pasien atau nomor antrian..." />
+                        <TextField fx:id="searchAntrianField" prefWidth="320.0" promptText="Nama pasien atau nomor antrian..." />
                     </HBox>
                     <TableView fx:id="tableAntrian" VBox.vgrow="ALWAYS">
                         <columns>

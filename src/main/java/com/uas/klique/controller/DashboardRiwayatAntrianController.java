@@ -16,6 +16,7 @@ public class DashboardRiwayatAntrianController {
 
     @FXML private DatePicker startDatePicker;
     @FXML private DatePicker endDatePicker;
+    @FXML private TextField fieldCariNama;
     @FXML private Button btnCari;
     @FXML private Button btnReset;
     @FXML private TableView<Antrian> tableRiwayat;
@@ -85,6 +86,7 @@ public class DashboardRiwayatAntrianController {
             });
         });
 
+        fieldCariNama.textProperty().addListener((obs, oldVal, newVal) -> cariRiwayat());
         tableRiwayat.setItems(riwayatList);
         tampilkanSemuaRiwayat();
     }
@@ -93,16 +95,25 @@ public class DashboardRiwayatAntrianController {
     public void cariRiwayat() {
         LocalDate start = startDatePicker.getValue();
         LocalDate end = endDatePicker.getValue();
+        String filterNama = fieldCariNama.getText() != null ? fieldCariNama.getText().toLowerCase() : "";
+
+        List<Antrian> data;
 
         if (start != null && end != null && !start.isAfter(end)) {
-            List<Antrian> data = antrianDao.getRiwayatByTanggalRange(start.toString(), end.toString());
-            riwayatList.setAll(data);
-        } else if (start != null && end == null) {
-            List<Antrian> data = antrianDao.getRiwayatByTanggal(start.toString());
-            riwayatList.setAll(data);
+            data = antrianDao.getRiwayatByTanggalRange(start.toString(), end.toString());
+        } else if (start != null) {
+            data = antrianDao.getRiwayatByTanggal(start.toString());
         } else {
-            tampilkanSemuaRiwayat();
+            data = antrianDao.getSemuaRiwayat();
         }
+
+        if (!filterNama.isBlank()) {
+            data = data.stream()
+                    .filter(a -> a.getNamaPasien().toLowerCase().contains(filterNama))
+                    .toList();
+        }
+
+        riwayatList.setAll(data);
     }
 
     @FXML
@@ -110,6 +121,7 @@ public class DashboardRiwayatAntrianController {
         startDatePicker.setValue(null);
         endDatePicker.setValue(null);
         endDatePicker.setDisable(true);
+        fieldCariNama.clear();
         tampilkanSemuaRiwayat();
     }
 

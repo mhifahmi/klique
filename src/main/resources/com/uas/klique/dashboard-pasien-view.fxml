@@ -46,7 +46,7 @@
                         <TextField fx:id="telpField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                     </GridPane>
 
-                    <Button onAction="#tambahPasien" text="Tambahkan/Update Pasien" />
+                    <Button onAction="#tambahPasien" text="Tambahkan/Update Pasien" styleClass="btn-detail" />
                 </VBox>
 
                 <!-- Tabel Pasien -->

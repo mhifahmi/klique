@@ -18,6 +18,7 @@
                     <DatePicker fx:id="endDatePicker" promptText="Tanggal Akhir" />
                     <Button fx:id="btnCari" text="Cari" onAction="#cariRiwayat" />
                     <Button fx:id="btnReset" text="Reset" onAction="#resetRiwayat" />
+                    <TextField fx:id="fieldCariNama" promptText="Cari nama pasien..." />
                 </HBox>
 
                 <TableView fx:id="tableRiwayat" VBox.vgrow="ALWAYS">

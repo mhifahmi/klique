@@ -3,12 +3,19 @@ package com.uas.klique.controller;
 import com.uas.klique.dao.PasienDao;
 import com.uas.klique.model.Pasien;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+
+import java.util.List;
 
 public class DashboardPasienController {
 
@@ -122,29 +129,33 @@ public class DashboardPasienController {
         dialog.showAndWait();
     }
 
-    // Lalu ubah bagian getActionCellFactory() untuk memanggil dialog tersebut
     private Callback<TableColumn<Pasien, String>, TableCell<Pasien, String>> getActionCellFactory() {
         return param -> new TableCell<>() {
             final Button btnDetail = new Button("Detail");
             final Button btnEdit = new Button("Edit");
             final Button btnHapus = new Button("Hapus");
-            final HBox pane = new HBox(5, btnDetail, btnEdit, btnHapus);
+            final HBox container = new HBox(10, btnDetail, btnEdit, btnHapus);
 
             {
+                container.setAlignment(Pos.CENTER);
+                container.setPrefWidth(Double.MAX_VALUE);
+
+                btnDetail.getStyleClass().add("btn-detail");
+                btnEdit.getStyleClass().add("btn-edit");
+                btnHapus.getStyleClass().add("btn-delete");
+
+                for (Button b : List.of(btnDetail, btnEdit, btnHapus)) {
+                    b.setPrefWidth(70); // atau gunakan setMaxWidth agar lebih fleksibel
+                }
+
                 btnDetail.setOnAction(e -> {
                     Pasien pasien = getTableView().getItems().get(getIndex());
                     showPasienDetail(pasien);
                 });
 
-                // opsional untuk btnEdit dan btnHapus nanti
-            }
-
-            {
                 btnEdit.setOnAction(e -> {
                     Pasien pasien = getTableView().getItems().get(getIndex());
-                    selectedPasien = pasien; // simpan yang sedang diedit
-
-                    // Isi field form dengan data pasien yang akan diedit
+                    selectedPasien = pasien;
                     namaField.setText(pasien.getNama());
                     nikField.setText(pasien.getNik());
                     alamatField.setText(pasien.getAlamat());
@@ -152,30 +163,22 @@ public class DashboardPasienController {
                     jkField.setText(pasien.getJenisKelamin());
                     telpField.setText(pasien.getNoTelepon());
                 });
-            }
 
-            {
                 btnHapus.setOnAction(e -> {
                     Pasien pasien = getTableView().getItems().get(getIndex());
-
-                    // Konfirmasi sebelum hapus
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Konfirmasi Hapus");
                     alert.setHeaderText("Yakin ingin menghapus pasien ini?");
                     alert.setContentText("Data akan dihapus permanen dari sistem.");
 
-                    ButtonType yesButton = new ButtonType("Ya", ButtonBar.ButtonData.OK_DONE);
-                    ButtonType cancelButton = new ButtonType("Batal", ButtonBar.ButtonData.CANCEL_CLOSE);
-                    alert.getButtonTypes().setAll(yesButton, cancelButton);
+                    ButtonType ya = new ButtonType("Ya", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType batal = new ButtonType("Batal", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(ya, batal);
 
                     alert.showAndWait().ifPresent(type -> {
-                        if (type == yesButton) {
-                            if (pasienDao.delete(pasien.getId())) {
-                                loadData();
-                                showInfo("Data pasien berhasil dihapus.");
-                            } else {
-                                showAlert("Gagal menghapus data pasien.");
-                            }
+                        if (type == ya && pasienDao.delete(pasien.getId())) {
+                            loadData();
+                            showInfo("Data pasien berhasil dihapus.");
                         }
                     });
                 });
@@ -184,11 +187,7 @@ public class DashboardPasienController {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    setGraphic(pane);
-                }
+                setGraphic(empty ? null : container);
             }
         };
     }

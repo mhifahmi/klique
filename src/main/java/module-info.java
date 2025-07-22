@@ -7,6 +7,7 @@ module com.uas.klique {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires java.desktop;
 
     opens com.uas.klique to javafx.fxml;
     opens com.uas.klique.controller to javafx.fxml;

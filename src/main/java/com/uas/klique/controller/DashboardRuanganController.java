@@ -8,6 +8,7 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -48,7 +49,7 @@ public class DashboardRuanganController {
     }
 
     private void setupStatusCombo() {
-        comboStatus.getItems().addAll("Tersedia", "Konsultasi", "Istirahat");
+        comboStatus.getItems().addAll("Tersedia", "Istirahat");
     }
 
     private void setupDokterCombo() {
@@ -80,8 +81,15 @@ public class DashboardRuanganController {
 
         colAksi.setCellFactory(col -> new TableCell<>() {
             final Button editBtn = new Button("Edit");
+
             @Override
             protected void updateItem(String item, boolean empty) {
+                editBtn.setMaxWidth(Double.MAX_VALUE); // full-width
+                editBtn.setStyle("-fx-alignment: center;"); // opsional gaya tambahan
+                setContentDisplay(ContentDisplay.GRAPHIC_ONLY); // agar button full cell
+                setAlignment(Pos.CENTER); // tombol tetap di tengah cell
+                editBtn.getStyleClass().add("btn-edit");
+
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
@@ -103,7 +111,7 @@ public class DashboardRuanganController {
         colNamaDokter.prefWidthProperty().bind(tableRuangan.widthProperty().multiply(0.45));
         colStatus.prefWidthProperty().bind(tableRuangan.widthProperty().multiply(0.15));
         colTglLahir.prefWidthProperty().bind(tableRuangan.widthProperty().multiply(0.15));
-        colAksi.prefWidthProperty().bind(tableRuangan.widthProperty().multiply(0.098));
+        colAksi.prefWidthProperty().bind(tableRuangan.widthProperty().multiply(0.096));
     }
 
     private void setupDokterTable() {
@@ -126,7 +134,7 @@ public class DashboardRuanganController {
         colNamaDokterTable.prefWidthProperty().bind(tableDokter.widthProperty().multiply(0.30));
         colNikDokter.prefWidthProperty().bind(tableDokter.widthProperty().multiply(0.25));
         colTelpDokter.prefWidthProperty().bind(tableDokter.widthProperty().multiply(0.20));
-        colTglLahirDokter.prefWidthProperty().bind(tableDokter.widthProperty().multiply(0.198));
+        colTglLahirDokter.prefWidthProperty().bind(tableDokter.widthProperty().multiply(0.196));
     }
 
     private void loadData() {

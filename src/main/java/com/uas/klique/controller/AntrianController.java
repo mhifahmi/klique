@@ -42,9 +42,6 @@ public class AntrianController {
     @FXML private TableView<Antrian> antrianTable;
     @FXML private TableColumn<Antrian, String> colNomor;
     @FXML private TableColumn<Antrian, String> colPasien;
-    @FXML private TableColumn<Antrian, String> colDokter;
-    @FXML private TableColumn<Antrian, String> colStatus;
-
 
     private final AntrianService antrianService = new AntrianService();
     private final RuanganService ruanganService = new RuanganService();
