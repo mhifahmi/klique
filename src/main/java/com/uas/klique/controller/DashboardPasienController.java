@@ -115,16 +115,22 @@ public class DashboardPasienController {
         dialog.setTitle("Detail Pasien");
         dialog.setHeaderText("Informasi Lengkap Pasien");
 
-        // Konten
-        String content =
-                "Nama: " + pasien.getNama() + "\n" +
-                        "NIK: " + pasien.getNik() + "\n" +
-                        "Alamat: " + pasien.getAlamat() + "\n" +
-                        "Tanggal Lahir: " + pasien.getTanggalLahir() + "\n" +
-                        "Jenis Kelamin: " + pasien.getJenisKelamin() + "\n" +
-                        "No. Telepon: " + pasien.getNoTelepon();
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%-16s: %s%n", "Nama", pasien.getNama()));
+        sb.append(String.format("%-16s: %s%n", "NIK", pasien.getNik()));
+        sb.append(String.format("%-16s: %s%n", "Alamat", pasien.getAlamat()));
+        sb.append(String.format("%-16s: %s%n", "Tanggal Lahir", pasien.getTanggalLahir()));
+        sb.append(String.format("%-16s: %s%n", "Jenis Kelamin", pasien.getJenisKelamin()));
+        sb.append(String.format("%-16s: %s%n", "No. Telepon", pasien.getNoTelepon()));
 
-        dialog.getDialogPane().setContent(new Label(content));
+        TextArea textArea = new TextArea(sb.toString());
+        textArea.setEditable(false);
+        textArea.setWrapText(false);
+        textArea.setStyle("-fx-font-family: 'monospace'; -fx-font-size: 12px;");
+        textArea.setMaxWidth(Double.MAX_VALUE);
+        textArea.setMaxHeight(Double.MAX_VALUE);
+
+        dialog.getDialogPane().setContent(textArea);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.showAndWait();
     }

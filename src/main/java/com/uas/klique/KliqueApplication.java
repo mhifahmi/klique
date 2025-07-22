@@ -16,8 +16,6 @@ public class KliqueApplication extends Application {
         // Register font
         Font.loadFont(getClass().getResource("/com/uas/klique/fonts/Poppins-Regular.ttf").toExternalForm(), 12);
         FXMLLoader fxmlLoader = new FXMLLoader(KliqueApplication.class.getResource("main-view.fxml"));
-//        FXMLLoader fxmlLoader = new FXMLLoader(KliqueApplication.class.getResource("dashboard-layout-view.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 1440, 768);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setMaximized(true);
         stage.setTitle("Hello!");
