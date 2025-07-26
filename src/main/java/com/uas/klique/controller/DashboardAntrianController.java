@@ -23,40 +23,34 @@ import java.util.Map;
 
 public class DashboardAntrianController {
 
-    @FXML private TextField fieldNamaPasien;
-    @FXML private TableView<Antrian> tableAntrian;
-    @FXML private TableColumn<Antrian, Void> colNo;
-    @FXML private TableColumn<Antrian, String> colNama;
+    @FXML private TextField fieldNamaPasien;               // Input nama pasien untuk ditambahkan ke antrian
+    @FXML private TableView<Antrian> tableAntrian;         // Tabel utama menampilkan data antrian
+    @FXML private TableColumn<Antrian, Void> colNo;        // Kolom nomor urut
+    @FXML private TableColumn<Antrian, String> colNama, colStatus, colRuang, colAksi;
     @FXML private TableColumn<Antrian, Integer> colNomor;
-    @FXML private TableColumn<Antrian, String> colStatus;
-    @FXML private TableColumn<Antrian, String> colRuang;
-    @FXML private TableColumn<Antrian, String> colAksi;
-    @FXML private ListView<String> listPasienSuggestion;
-    @FXML private TextField searchAntrianField;
-    @FXML private Text textTerakhirDipanggilNomor;
-    @FXML private Text textTerakhirDipanggilNama;
-    @FXML private Text textAntrianSelanjutnya;
-    @FXML private Text textAntrianTerlewat;
+    @FXML private ListView<String> listPasienSuggestion;   // Menampilkan saran nama pasien (autocomplete)
+    @FXML private TextField searchAntrianField;            // Kolom pencarian
+    @FXML private Text textTerakhirDipanggilNomor, textTerakhirDipanggilNama, textAntrianSelanjutnya, textAntrianTerlewat;
 
-    private final AntrianService antrianService = new AntrianService();
-    private final PasienDao pasienDao = new PasienDao();
-    private final RuanganDao ruanganDao = new RuanganDao();
+    private final AntrianService antrianService = new AntrianService(); // Service utama untuk logika antrian
+    private final PasienDao pasienDao = new PasienDao();                // DAO pasien
+    private final RuanganDao ruanganDao = new RuanganDao();             // DAO ruangan
 
-    private Integer selectedPasienId = null;
-    private Integer selectedDokterId = null;
-    private Boolean isRuangTersedia = null;
+    private Integer selectedPasienId = null;        // ID pasien yang dipilih dari autocomplete
+    private Integer selectedDokterId = null;        // (tidak digunakan saat ini)
+    private Boolean isRuangTersedia = null;         // Status apakah ada ruangan yang tersedia
 
     private ObservableList<Antrian> masterAntrianList = FXCollections.observableArrayList();
     private FilteredList<Antrian> filteredAntrianList;
 
     @FXML
     public void initialize() {
-        searchPasienProcess();
+        searchPasienProcess(); // Menyusun logika autocomplete pasien
 
         // Inisialisasi kolom
         colNo.setCellFactory(col -> new TableCell<>() {
             @Override
-            protected void updateItem(Void item, boolean empty) {
+            protected void updateItem(Void item, boolean empty) { // Menampilkan urutan baris
                 super.updateItem(item, empty);
                 if (empty) {
                     setText(null);
@@ -66,10 +60,13 @@ public class DashboardAntrianController {
             }
         });
         colNo.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(null));
+        // Ambil nilai properti dari model Antrian
         colNama.setCellValueFactory(new PropertyValueFactory<>("namaPasien"));
         colNomor.setCellValueFactory(new PropertyValueFactory<>("nomorAntrian"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-        colRuang.setCellValueFactory(new PropertyValueFactory<>("namaDokter")); // atau tampilkan ruangan jika ingin
+        colRuang.setCellValueFactory(new PropertyValueFactory<>("namaDokter"));
+
+        // Kolom aksi: tombol dinamis berdasarkan status antrian
         colAksi.setCellFactory(tc -> new TableCell<>() {
             private final Button btn = new Button();
 
@@ -126,6 +123,7 @@ public class DashboardAntrianController {
             }
         });
 
+        // Atur lebar kolom secara proporsional
         colNo.prefWidthProperty().bind(tableAntrian.widthProperty().multiply(0.05));
         colNama.prefWidthProperty().bind(tableAntrian.widthProperty().multiply(0.30));
         colNomor.prefWidthProperty().bind(tableAntrian.widthProperty().multiply(0.148));
@@ -133,17 +131,17 @@ public class DashboardAntrianController {
         colRuang.prefWidthProperty().bind(tableAntrian.widthProperty().multiply(0.15));
         colAksi.prefWidthProperty().bind(tableAntrian.widthProperty().multiply(0.20));
 
-        refreshTable();
+        refreshTable(); // Isi data tabel dan statistik
     }
 
     private void refreshTable() {
-        // Antrian Card
+        // Ambil semua antrian hari ini
         List<Antrian> list = antrianService.getAntrianHariIni();
         masterAntrianList.setAll(list);
         filteredAntrianList = new FilteredList<>(masterAntrianList, p -> true);
         tableAntrian.setItems(filteredAntrianList);
 
-        // Statistik
+        // Menentukan status antrian untuk kartu statistik
         Antrian terakhirDipanggil = list.stream()
                 .filter(a -> "Dipanggil".equals(a.getStatus()))
                 .findFirst().orElse(null);
@@ -156,6 +154,7 @@ public class DashboardAntrianController {
                 .filter(a -> "Terlewat".equals(a.getStatus()))
                 .findFirst().orElse(null);
 
+        // Update teks tampilan UI
         textTerakhirDipanggilNomor.setText(terakhirDipanggil != null ? String.valueOf(terakhirDipanggil.getNomorAntrian()) : "—");
         textTerakhirDipanggilNama.setText(terakhirDipanggil != null ? terakhirDipanggil.getNamaPasien() : "—");
 
@@ -166,9 +165,10 @@ public class DashboardAntrianController {
         masterAntrianList.setAll(antrianService.getAntrianHariIni());
         filteredAntrianList = new FilteredList<>(masterAntrianList, p -> true);
 
-        // Set listener pencarian
+        // Atur listener filter pencarian
         searchAntrianField.textProperty().addListener((obs, oldVal, newVal) -> {
             filteredAntrianList.setPredicate(antrian -> {
+                // Filter berdasarkan nama atau nomor
                 if (newVal == null || newVal.isBlank()) return true;
                 String filter = newVal.toLowerCase();
 
@@ -194,19 +194,18 @@ public class DashboardAntrianController {
         // Ambil nomor antrian terakhir hari ini
         int nomorBaru = antrianService.getNextNomorAntrianHariIni();
 
-        // Buat entitas antrian
+        // Buat entitas Antrian
         Antrian antrian = new Antrian();
         antrian.setNomorAntrian(nomorBaru);
         antrian.setIdPasien(idPasien);
-//        antrian.setIdRuangan(idDokter != null ? dokterDao.getRuanganIdByDokterId(idDokter) : null); // kalau null, bisa auto-assign di backend
-        antrian.setIdRuangan(0); // kalau null, bisa auto-assign di backend
+        antrian.setIdRuangan(0); // Auto assign backend
         antrian.setStatus("Menunggu");
         antrian.setTanggal(LocalDate.now().toString());
 
         // Simpan ke DB
         antrianService.simpanAntrianBaru(antrian);
 
-        // Reset
+        // Reset input
         selectedPasienId = null;
         selectedDokterId = null;
         fieldNamaPasien.clear();
@@ -257,6 +256,10 @@ public class DashboardAntrianController {
     }
 
     private void ubahDipanggil(Antrian antrian) {
+        // Set semua antrian yang sedang "Dipanggil" menjadi "Terlewat"
+        // Tetapkan ruangan baru untuk antrian yang akan dipanggil
+        // Update status & refresh
+
         // Cari ruangan yang tersedia
         Ruangan ruanganTersedia = ruanganDao.getRuanganTersedia();
         if (ruanganTersedia == null) {
@@ -281,6 +284,9 @@ public class DashboardAntrianController {
     }
 
     private void ubahDilayani(Antrian antrian) {
+        // Set status menjadi "Dilayani"
+        // Update dokter_id dan status ruangan ke "Konsultasi"
+
         antrian.setStatus("Dilayani");
         antrianService.updateStatus(antrian.getId(), "Dilayani");
 
@@ -300,6 +306,10 @@ public class DashboardAntrianController {
 
 
     private void ubahSelesai(Antrian antrian) {
+        // Set status menjadi "Selesai"
+        // Ubah ruangan menjadi "Tersedia"
+        // Panggil antrian berikutnya (jika ada)
+
         antrian.setStatus("Selesai");
         antrianService.updateStatus(antrian.getId(), "Selesai");
         if (antrian.getIdRuangan() != 0) {
@@ -311,6 +321,8 @@ public class DashboardAntrianController {
 
     @FXML
     private void panggilAntrianSelanjutnya() {
+        // Ambil antrian dengan status "Menunggu" pertama, lalu ubah ke "Dipanggil"
+
         List<Antrian> list = masterAntrianList.stream()
                 .filter(a -> "Menunggu".equals(a.getStatus()))
                 .sorted(Comparator.comparingInt(Antrian::getNomorAntrian))
@@ -323,6 +335,8 @@ public class DashboardAntrianController {
 
     @FXML
     private void panggilAntrianTerlewat() {
+        // Ambil antrian dengan status "Terlewat" pertama, lalu ubah ke "Dipanggil"
+
         List<Antrian> list = masterAntrianList.stream()
                 .filter(a -> "Terlewat".equals(a.getStatus()))
                 .sorted(Comparator.comparingInt(Antrian::getNomorAntrian))
@@ -334,6 +348,8 @@ public class DashboardAntrianController {
     }
 
     private void panggilAntrianBerikutnyaSetelahSelesai() {
+        // Prioritaskan antrian "Terlewat", lalu "Menunggu"
+
         List<Antrian> terlewat = masterAntrianList.stream()
                 .filter(a -> "Terlewat".equals(a.getStatus()))
                 .sorted(Comparator.comparingInt(Antrian::getNomorAntrian))

@@ -19,17 +19,19 @@ import java.util.List;
 
 public class DashboardPasienController {
 
+    // ======== FXML Field Bindings ========
     @FXML private TextField namaField, nikField, alamatField, tglLahirField, jkField, telpField;
     @FXML private TableView<Pasien> tablePasien;
     @FXML private TableColumn<Pasien, Integer> colNo;
     @FXML private TableColumn<Pasien, String> colNama, colNik, colTelp, colTglLahir, colAksi;
 
+    // ======== Data & DAO ========
     private ObservableList<Pasien> pasienList = FXCollections.observableArrayList();
     private final PasienDao pasienDao = new PasienDao();
-
-    private Pasien selectedPasien = null;
+    private Pasien selectedPasien = null; // Digunakan saat edit
 
     public void initialize() {
+        // Set kolom berdasarkan properti model
         colNo.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNama.setCellValueFactory(new PropertyValueFactory<>("nama"));
         colNik.setCellValueFactory(new PropertyValueFactory<>("nik"));
@@ -37,7 +39,7 @@ public class DashboardPasienController {
         colTglLahir.setCellValueFactory(new PropertyValueFactory<>("tanggalLahir"));
         colAksi.setCellFactory(getActionCellFactory());
 
-        // Bind column widths
+        // Atur lebar kolom agar proporsional
         colNo.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.05));
         colNama.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.28));
         colNik.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.22));
@@ -45,8 +47,7 @@ public class DashboardPasienController {
         colTglLahir.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.12));
         colAksi.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.20));
 
-
-        loadData();
+        loadData(); // Ambil data awal dari database
     }
 
     private void loadData() {
@@ -92,6 +93,7 @@ public class DashboardPasienController {
     }
 
 
+    // Membersihkan semua input field
     private void clearForm() {
         namaField.clear();
         nikField.clear();
@@ -110,6 +112,7 @@ public class DashboardPasienController {
         alert.showAndWait();
     }
 
+    // Menyusun dialog detail dengan format monospaced
     private void showPasienDetail(Pasien pasien) {
         Dialog<Void> dialog = new Dialog<>();
         dialog.setTitle("Detail Pasien");
@@ -143,9 +146,11 @@ public class DashboardPasienController {
             final HBox container = new HBox(10, btnDetail, btnEdit, btnHapus);
 
             {
+                // Tampilan tombol dan styling
                 container.setAlignment(Pos.CENTER);
                 container.setPrefWidth(Double.MAX_VALUE);
 
+                // styling button
                 btnDetail.getStyleClass().add("btn-detail");
                 btnEdit.getStyleClass().add("btn-edit");
                 btnHapus.getStyleClass().add("btn-delete");
@@ -154,11 +159,13 @@ public class DashboardPasienController {
                     b.setPrefWidth(70); // atau gunakan setMaxWidth agar lebih fleksibel
                 }
 
+                // tombol detail
                 btnDetail.setOnAction(e -> {
                     Pasien pasien = getTableView().getItems().get(getIndex());
                     showPasienDetail(pasien);
                 });
 
+                // tombol edit
                 btnEdit.setOnAction(e -> {
                     Pasien pasien = getTableView().getItems().get(getIndex());
                     selectedPasien = pasien;
@@ -170,6 +177,7 @@ public class DashboardPasienController {
                     telpField.setText(pasien.getNoTelepon());
                 });
 
+                // tombol hapus
                 btnHapus.setOnAction(e -> {
                     Pasien pasien = getTableView().getItems().get(getIndex());
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -198,6 +206,7 @@ public class DashboardPasienController {
         };
     }
 
+    // notifikasi berhasil
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Informasi");

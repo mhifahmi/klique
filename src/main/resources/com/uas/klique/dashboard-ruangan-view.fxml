@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Import komponen JavaFX yang digunakan -->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.DashboardRuanganController">
+<!-- Root layout -->
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.controller.DashboardRuanganController">
 
     <center>
         <ScrollPane fitToWidth="true" fitToHeight="true">
             <VBox spacing="20" alignment="TOP_CENTER" styleClass="dashboard-root">
 
-                <!-- Edit Ruangan Form -->
+                <!-- Form untuk mengedit ruangan -->
                 <Text styleClass="form-title" text="Edit Ruangan" />
                 <HBox spacing="10">
                     <VBox spacing="5">
@@ -24,7 +28,7 @@
                     <Button text="Update Ruangan" onAction="#updateRuangan" styleClass="secondary-button" />
                 </HBox>
 
-                <!-- Table Ruangan -->
+                <!-- Tabel daftar ruangan -->
                 <Text styleClass="page-title" text="Ruang Dokter" />
                 <VBox spacing="10" VBox.vgrow="ALWAYS">
                     <Text styleClass="form-title" text="Daftar Ruangan" />
@@ -40,7 +44,7 @@
                     </TableView>
                 </VBox>
 
-                <!-- Table Dokter -->
+                <!-- Tabel daftar dokter -->
                 <VBox spacing="10" VBox.vgrow="ALWAYS">
                     <Text styleClass="form-title" text="Daftar Dokter" />
                     <TableView fx:id="tableDokter" VBox.vgrow="ALWAYS">
@@ -57,5 +61,4 @@
             </VBox>
         </ScrollPane>
     </center>
-
 </BorderPane>

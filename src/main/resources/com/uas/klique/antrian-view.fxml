@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Import komponen JavaFX yang digunakan -->
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,39 +11,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane stylesheets="@styles/antrian-style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.AntrianController">
+<!-- Root layout menggunakan BorderPane dengan stylesheet eksternal -->
+<BorderPane stylesheets="@styles/antrian-style.css"
+            xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.controller.AntrianController">
 
     <center>
+        <!-- Scrollable content di bagian tengah -->
         <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
             <VBox alignment="TOP_CENTER" spacing="20" styleClass="dashboard-root">
 
-                <!-- ===== Header ===== -->
+                <!-- ===== Header Judul dan Tanggal Hari Ini ===== -->
                 <HBox alignment="CENTER_LEFT" spacing="20">
                     <Text styleClass="header-text" text="Daftar Antrian - Klinik Hoyong Damang" />
-                    <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
-                    <Text fx:id="headerDate" styleClass="date-text" />
+                    <Region fx:id="spacer" HBox.hgrow="ALWAYS" /> <!-- Spacer untuk dorong tanggal ke kanan -->
+                    <Text fx:id="headerDate" styleClass="date-text" /> <!-- Tanggal hari ini -->
                 </HBox>
 
-                <!-- ===== Next Queue & Room Status ===== -->
+                <!-- ===== Panel Antrian Selanjutnya dan Status Ruangan ===== -->
                 <HBox spacing="30">
-                    <!-- Next Queue -->
+                    <!-- Panel: Antrian Selanjutnya -->
                     <VBox alignment="CENTER" spacing="10" styleClass="panel" HBox.hgrow="ALWAYS">
                         <Text styleClass="section-title" text="Antrian Selanjutnya" />
-                        <Text fx:id="nextQueueNumber" styleClass="big-number" text="08" />
-                        <Text fx:id="nextQueueName" styleClass="name-text" text="Nama Pasien" />
-                        <Label fx:id="nextQueueDoctor" alignment="CENTER" maxWidth="Infinity" styleClass="doctor-label" text="Dr. Nama Dokter" />
+                        <Text fx:id="nextQueueNumber" styleClass="big-number" text="08" /> <!-- Nomor antrian berikutnya -->
+                        <Text fx:id="nextQueueName" styleClass="name-text" text="Nama Pasien" /> <!-- Nama pasien -->
+                        <Label fx:id="nextQueueDoctor" alignment="CENTER" maxWidth="Infinity"
+                               styleClass="doctor-label" text="Dr. Nama Dokter" /> <!-- Nama dokter -->
                     </VBox>
 
-                    <!-- Room Statuses -->
+                    <!-- Panel: Status Tiga Ruangan -->
                     <VBox spacing="10" HBox.hgrow="ALWAYS">
+                        <!-- Ruangan 1 - Status tersedia -->
                         <VBox spacing="5" styleClass="panel room-available">
-                            <Text fx:id="room1Status" styleClass="section-title" />
-                            <Text fx:id="room1Doctor" styleClass="doctor-label" />
+                            <Text fx:id="room1Status" styleClass="section-title" /> <!-- Status ruangan -->
+                            <Text fx:id="room1Doctor" styleClass="doctor-label" /> <!-- Nama dokter -->
                         </VBox>
+                        <!-- Ruangan 2 - Sedang istirahat -->
                         <VBox spacing="5" styleClass="panel room-rest">
                             <Text fx:id="room2Status" styleClass="section-title" />
                             <Text fx:id="room2Doctor" styleClass="doctor-label" />
                         </VBox>
+                        <!-- Ruangan 3 - Sedang konsultasi -->
                         <VBox spacing="5" styleClass="panel room-consulting">
                             <Text fx:id="room3Status" styleClass="section-title" />
                             <Text fx:id="room3Doctor" styleClass="doctor-label" />
@@ -50,26 +60,31 @@
                     </VBox>
                 </HBox>
 
-                <!-- ===== Statistik ===== -->
+                <!-- ===== Panel Statistik Antrian ===== -->
                 <HBox spacing="30">
+                    <!-- Jumlah antrian menunggu -->
                     <VBox alignment="CENTER" styleClass="counter-box" HBox.hgrow="ALWAYS">
                         <Text styleClass="section-title" text="Menunggu Antrian" />
                         <Text fx:id="waitingQueueCount" styleClass="big-number" text="00" />
                     </VBox>
+                    <!-- Jumlah antrian terlewat -->
                     <VBox alignment="CENTER" styleClass="counter-box" HBox.hgrow="ALWAYS">
                         <Text styleClass="section-title" text="Antrian Terlewat" />
                         <Text fx:id="missedQueueCount" styleClass="big-number" text="00" />
                     </VBox>
+                    <!-- Jumlah antrian selesai -->
                     <VBox alignment="CENTER" styleClass="counter-box" HBox.hgrow="ALWAYS">
                         <Text styleClass="section-title" text="Antrian Selesai" />
                         <Text fx:id="emptyQueueCount" styleClass="big-number" text="00" />
                     </VBox>
                 </HBox>
 
-                <!-- ===== Table ===== -->
+                <!-- ===== Tabel Daftar Antrian Hari Ini ===== -->
                 <TableView fx:id="antrianTable" VBox.vgrow="ALWAYS">
                     <columns>
+                        <!-- Kolom Nomor Antrian -->
                         <TableColumn fx:id="colNomor" text="Nomor" />
+                        <!-- Kolom Nama Pasien -->
                         <TableColumn fx:id="colPasien" text="Pasien" />
                     </columns>
                 </TableView>

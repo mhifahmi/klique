@@ -1,33 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Import komponen-komponen JavaFX yang dibutuhkan -->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
+<!-- Root layout menggunakan BorderPane dan dikendalikan oleh DashboardRiwayatAntrianController -->
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.DashboardRiwayatAntrianController">
 
+    <!-- Bagian tengah (center) diisi dengan konten utama halaman -->
     <center>
+        <!-- ScrollPane agar konten bisa discroll jika melebihi layar -->
         <ScrollPane fitToWidth="true" fitToHeight="true">
+            <!-- VBox sebagai kontainer vertikal utama -->
             <VBox spacing="20" alignment="TOP_CENTER" styleClass="dashboard-root">
 
+                <!-- Judul halaman -->
                 <Label text="Riwayat Antrian Pasien" styleClass="form-title" />
 
+                <!-- Baris filter: tanggal dan pencarian nama pasien -->
                 <HBox spacing="10">
+                    <!-- Label filter tanggal -->
                     <Label text="Rentang Tanggal:" />
+                    <!-- Picker tanggal mulai -->
                     <DatePicker fx:id="startDatePicker" promptText="Tanggal Mulai" />
+                    <!-- Picker tanggal akhir -->
                     <DatePicker fx:id="endDatePicker" promptText="Tanggal Akhir" />
+                    <!-- Tombol untuk memicu pencarian -->
                     <Button fx:id="btnCari" text="Cari" onAction="#cariRiwayat" />
+                    <!-- Tombol untuk mereset filter -->
                     <Button fx:id="btnReset" text="Reset" onAction="#resetRiwayat" />
+                    <!-- TextField untuk mencari berdasarkan nama pasien -->
                     <TextField fx:id="fieldCariNama" promptText="Cari nama pasien..." />
                 </HBox>
 
+                <!-- Tabel untuk menampilkan daftar riwayat antrian -->
                 <TableView fx:id="tableRiwayat" VBox.vgrow="ALWAYS">
                     <columns>
+                        <!-- Kolom nomor urut -->
                         <TableColumn fx:id="colNo" text="No" />
+                        <!-- Kolom nama pasien -->
                         <TableColumn fx:id="colNamaPasien" text="Nama Pasien" />
+                        <!-- Kolom NIK -->
                         <TableColumn fx:id="colNik" text="NIK" />
+                        <!-- Kolom tanggal kunjungan -->
                         <TableColumn fx:id="colTanggal" text="Tanggal Kunjungan" />
+                        <!-- Kolom nama dokter yang menangani -->
                         <TableColumn fx:id="colDokter" text="Dokter yang Menangani" />
+                        <!-- Kolom status antrian -->
                         <TableColumn fx:id="colStatus" text="Status" />
                     </columns>
                 </TableView>

@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Import elemen-elemen UI JavaFX -->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uas.klique.controller.DashboardPasienController">
+<!-- Layout utama menggunakan BorderPane -->
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.uas.klique.controller.DashboardPasienController">
 
+    <!-- Bagian tengah layar -->
     <center>
         <ScrollPane fitToWidth="true" fitToHeight="true">
             <VBox spacing="20" alignment="TOP_CENTER" styleClass="dashboard-root">
+
+                <!-- Judul Halaman -->
                 <Text styleClass="page-title" text="Data Pasien" />
 
+                <!-- =================== -->
                 <!-- Form Tambah Pasien -->
+                <!-- =================== -->
                 <VBox spacing="10">
                     <Text styleClass="form-title" text="Tambah Pasien Baru" />
+
+                    <!-- Layout form menggunakan Grid -->
                     <GridPane hgap="10" vgap="10">
+                        <!-- Kolom dan baris grid -->
                         <columnConstraints>
                             <ColumnConstraints percentWidth="20" />
                             <ColumnConstraints percentWidth="30" />
@@ -27,18 +39,21 @@
                             <RowConstraints />
                         </rowConstraints>
 
+                        <!-- Baris 1 -->
                         <Label text="Nama Pasien:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                         <TextField fx:id="namaField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                         <Label text="NIK:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
                         <TextField fx:id="nikField" GridPane.columnIndex="3" GridPane.rowIndex="0" />
 
+                        <!-- Baris 2 -->
                         <Label text="Alamat:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                         <TextField fx:id="alamatField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                         <Label text="Tanggal Lahir:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <TextField fx:id="tglLahirField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
+                        <!-- Baris 3 -->
                         <Label text="Jenis Kelamin:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                         <TextField fx:id="jkField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
@@ -46,28 +61,33 @@
                         <TextField fx:id="telpField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                     </GridPane>
 
-                    <Button onAction="#tambahPasien" text="Tambahkan/Update Pasien" styleClass="btn-detail" />
+                    <!-- Tombol Tambah/Update -->
+                    <Button onAction="#tambahPasien"
+                            text="Tambahkan/Update Pasien"
+                            styleClass="btn-detail" />
                 </VBox>
 
-                <!-- Tabel Pasien -->
+                <!-- ================== -->
+                <!-- Tabel Data Pasien -->
+                <!-- ================== -->
                 <VBox spacing="10" VBox.vgrow="ALWAYS">
                     <Text styleClass="form-title" text="Daftar Pasien" />
 
-                    <!-- Pencarian -->
+                    <!-- Pencarian Pasien -->
                     <HBox spacing="10">
                         <Label text="Cari Pasien:" />
                         <TextField fx:id="searchPasienField" promptText="Nama atau NIK pasien..." />
                     </HBox>
 
-                    <!-- Tabel Pasien -->
+                    <!-- Tabel utama pasien -->
                     <TableView fx:id="tablePasien" VBox.vgrow="ALWAYS">
                         <columns>
-                            <TableColumn fx:id="colNo" text="No" />
-                            <TableColumn fx:id="colNama" text="Nama Pasien" />
-                            <TableColumn fx:id="colNik" text="NIK" />
-                            <TableColumn fx:id="colTelp" text="No. Telepon" />
-                            <TableColumn fx:id="colTglLahir" text="Tanggal Lahir" />
-                            <TableColumn fx:id="colAksi" text="Aksi" />
+                            <TableColumn fx:id="colNo" text="No" />                 <!-- Nomor urut -->
+                            <TableColumn fx:id="colNama" text="Nama Pasien" />     <!-- Nama -->
+                            <TableColumn fx:id="colNik" text="NIK" />               <!-- NIK -->
+                            <TableColumn fx:id="colTelp" text="No. Telepon" />      <!-- Telepon -->
+                            <TableColumn fx:id="colTglLahir" text="Tanggal Lahir" /><!-- Tgl Lahir -->
+                            <TableColumn fx:id="colAksi" text="Aksi" />              <!-- Aksi (Edit/Hapus) -->
                         </columns>
                     </TableView>
                 </VBox>

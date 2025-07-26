@@ -1,48 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Import komponen yang digunakan -->
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.ScrollPane?>
+
+<!-- Root layout BorderPane, digunakan untuk membagi UI menjadi top, bottom, left, right, center -->
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.uas.klique.controller.MainController"
             stylesheets="@styles/main-style.css">
 
+    <!-- Bagian tengah dari BorderPane -->
     <center>
+        <!-- ScrollPane untuk memungkinkan scroll jika konten terlalu panjang -->
         <ScrollPane fitToWidth="true" fitToHeight="true">
+            <!-- Kontainer utama dengan layout VBox dan jarak antar elemen 30 -->
             <VBox alignment="CENTER" spacing="30" styleClass="dashboard-root">
 
-                <!-- Title -->
+                <!-- Bagian judul utama aplikasi -->
                 <VBox alignment="CENTER" spacing="5">
-                    <Text styleClass="title-text" text="Klique" />
-                    <Text styleClass="subtitle-text" text="Sistem Antrian Klinik" />
+                    <Text styleClass="title-text" text="Klique" /> <!-- Judul utama aplikasi -->
+                    <Text styleClass="subtitle-text" text="Sistem Antrian Klinik" /> <!-- Subjudul -->
                 </VBox>
 
-                <!-- 2 Card Pilihan -->
+                <!-- Dua buah kartu pilihan menu utama -->
                 <HBox alignment="CENTER" spacing="50">
 
-                    <!-- Lihat Antrian -->
+                    <!-- Kartu untuk pengguna pengunjung (lihat antrian) -->
                     <VBox alignment="CENTER" onMouseClicked="#handleLihatAntrian" spacing="10" styleClass="card">
+                        <!-- Gambar ikon antrian -->
                         <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@assets/queue.png" />
                             </image>
                         </ImageView>
+                        <!-- Judul kartu -->
                         <Text styleClass="card-title" text="Lihat Antrian" textAlignment="CENTER" wrappingWidth="162" />
+                        <!-- Deskripsi kartu -->
                         <Text styleClass="card-desc" text="Lihat langsung antrian sebagai pengunjung" textAlignment="CENTER" wrappingWidth="345" />
                     </VBox>
 
-                    <!-- Login -->
+                    <!-- Kartu untuk login sebagai staff -->
                     <VBox alignment="CENTER" onMouseClicked="#handleLogin" spacing="10" styleClass="card">
+                        <!-- Gambar ikon masuk/login -->
                         <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@assets/enter.png" />
                             </image>
                         </ImageView>
+                        <!-- Judul kartu -->
                         <Text styleClass="card-title" text="Login" textAlignment="CENTER" wrappingWidth="150" />
+                        <!-- Deskripsi kartu -->
                         <Text styleClass="card-desc" text="Masuk ke aplikasi sebagai staff" textAlignment="CENTER" wrappingWidth="286" />
                     </VBox>
 
