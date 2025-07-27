@@ -2,6 +2,8 @@ package com.uas.klique.controller;
 
 import com.uas.klique.dao.PasienDao;
 import com.uas.klique.model.Pasien;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -24,6 +26,10 @@ public class DashboardPasienController {
     @FXML private TableView<Pasien> tablePasien;
     @FXML private TableColumn<Pasien, Integer> colNo;
     @FXML private TableColumn<Pasien, String> colNama, colNik, colTelp, colTglLahir, colAksi;
+    @FXML private TextField searchPasienField;
+
+    private final ObservableList<Pasien> masterPasienList = FXCollections.observableArrayList();
+    private FilteredList<Pasien> filteredPasienList;
 
     // ======== Data & DAO ========
     private ObservableList<Pasien> pasienList = FXCollections.observableArrayList();
@@ -39,7 +45,7 @@ public class DashboardPasienController {
         colTglLahir.setCellValueFactory(new PropertyValueFactory<>("tanggalLahir"));
         colAksi.setCellFactory(getActionCellFactory());
 
-        // Atur lebar kolom agar proporsional
+        // Atur lebar kolom
         colNo.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.05));
         colNama.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.28));
         colNik.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.22));
@@ -47,13 +53,37 @@ public class DashboardPasienController {
         colTglLahir.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.12));
         colAksi.prefWidthProperty().bind(tablePasien.widthProperty().multiply(0.20));
 
-        loadData(); // Ambil data awal dari database
+        // Ambil dan filter data
+        loadAndFilterPasienData();
+    }
+
+    private void loadAndFilterPasienData() {
+        List<Pasien> all = pasienDao.getAll();
+        masterPasienList.setAll(all);
+
+        filteredPasienList = new FilteredList<>(masterPasienList, p -> true);
+
+        // Tambahkan SortedList untuk mengaktifkan sort header
+        SortedList<Pasien> sortedData = new SortedList<>(filteredPasienList);
+        sortedData.comparatorProperty().bind(tablePasien.comparatorProperty());
+
+        tablePasien.setItems(sortedData);
+
+        searchPasienField.textProperty().addListener((obs, oldVal, newVal) -> {
+            String keyword = newVal.toLowerCase().trim();
+            filteredPasienList.setPredicate(pasien -> {
+                if (keyword.isEmpty()) return true;
+                return pasien.getNama().toLowerCase().contains(keyword) ||
+                        pasien.getNik().toLowerCase().contains(keyword);
+            });
+        });
     }
 
     private void loadData() {
-        pasienList.clear();
-        pasienList.addAll(pasienDao.getAll());
-        tablePasien.setItems(pasienList);
+//        pasienList.clear();
+//        pasienList.addAll(pasienDao.getAll());
+//        tablePasien.setItems(pasienList);
+          masterPasienList.setAll(pasienDao.getAll());
     }
 
     public void tambahPasien() {
